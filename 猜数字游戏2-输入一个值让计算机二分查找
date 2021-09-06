@@ -1,0 +1,77 @@
+//猜数字游戏翻版
+//1.输入一个1-20之间的数字
+//2.让电脑使用二分查找来猜数字
+//3.提示猜的数字大了或小了
+
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+void menu()
+{
+	printf("\n1.玩游戏\n");
+	printf("0.退出\n");
+}
+
+void game()
+{
+	printf("请输入一个数字\n");
+	int input2;
+	scanf("%d", &input2);
+	char arr[] = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30 };
+	int left = 0;
+	int right = 29;
+	int mid = 14;
+	do
+	{
+		printf("是否为%d?\n", arr[mid]);
+		if (arr[mid] == input2)
+		{
+			printf("猜对了\n");
+			break;
+		}
+		else
+		{
+			char D[10];
+			char A[] = { "大了" };
+			char B[] = { "小了" };
+			scanf("%s", &D);
+			if (strcmp(A, D) == 0)
+			{
+				right = mid - 1;
+				mid = (left + right) / 2;
+			}
+			if (strcmp(B, D) == 0)
+			{
+				left = mid + 1;
+				mid = (left + right) / 2;
+			}
+		}
+	} while (1);
+
+
+}
+
+int main()
+{
+	int input;
+	do
+	{
+		menu();
+		scanf("%d", &input);
+		switch (input)
+		{
+		case 1:
+			game();
+			break;
+		case 0:
+			printf("退出游戏\n");
+			break;
+		default:
+			printf("输入错误,请重试\n");
+			break;
+		}
+	} while (input);
+
+	return 0;
+}
